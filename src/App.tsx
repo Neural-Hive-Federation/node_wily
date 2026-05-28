@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { SalesAdvisorWidget } from './components/SalesAdvisorWidget';
-import { NeuralFeed } from './components/NeuralFeed';
 import { MessageCircle, ArrowRight, MapPin, Phone } from 'lucide-react';
 
 function App() {
@@ -273,8 +272,6 @@ function App() {
           <MessageCircle size={24} className="text-green-400" />
         </motion.a>
       </div>
-
-      <NeuralFeed nodeId="fcf17500-dc7e-4342-be83-079274312a3a" />
 
       <section className="py-20 bg-[#050505] border-t border-white/10 relative overflow-hidden">
         <div className="max-w-4xl mx-auto px-6">
