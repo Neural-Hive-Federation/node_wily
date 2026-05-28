@@ -1,7 +1,37 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { SalesAdvisorWidget } from './components/SalesAdvisorWidget';
 import { MessageCircle, ArrowRight, MapPin, Phone } from 'lucide-react';
+
+const SalesAdvisorWidget = ({ nodeName, adn }: { nodeName: string; adn: string }) => {
+  const accentColor = '#FF6B35';
+  const glassmorphism = 'backdrop-blur-md bg-white/10 border border-white/10';
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className={`fixed bottom-4 left-4 z-50 max-w-xs rounded-2xl p-4 ${glassmorphism} border border-orange-400/20`}
+    >
+      <div className="flex items-start gap-3">
+        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-orange-400 to-pink-500 flex items-center justify-center">
+          <span className="text-xs font-black text-white">N</span>
+        </div>
+        <div className="flex-1">
+          <div className="flex items-center gap-2 mb-1">
+            <span className="text-xs font-bold uppercase tracking-widest text-orange-400">Asesor Neural</span>
+            <span className="text-[8px] bg-orange-500/20 text-orange-300 px-2 py-0.5 rounded-full border border-orange-400/30">
+              ACTIVO
+            </span>
+          </div>
+          <h4 className="text-sm font-black uppercase tracking-tighter">
+            {nodeName} <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-pink-500">Online</span>
+          </h4>
+          <p className="text-xs text-gray-300 mt-2 leading-relaxed">{adn}</p>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
 
 function App() {
   const accentColor = '#FF6B35';
