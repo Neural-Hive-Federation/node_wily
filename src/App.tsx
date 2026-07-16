@@ -35,6 +35,20 @@ const posts: Post[] = [
     date: "10 de febrero de 2023",
     image: "https://via.placeholder.com/600x400",
   },
+  {
+    id: 2,
+    title: "Innovación Tecnológica",
+    content: "Transformación digital con IA y automatización.",
+    date: "15 de marzo de 2023",
+    image: "https://via.placeholder.com/600x400",
+  },
+  {
+    id: 3,
+    title: "Consultoría Estratégica",
+    content: "Asesoramiento personalizado para crecimiento empresarial.",
+    date: "20 de abril de 2023",
+    image: "https://via.placeholder.com/600x400",
+  }
 ];
 
 function App() {
@@ -45,8 +59,44 @@ function App() {
           <div className="h-1 w-12 rounded-full" style={{ backgroundColor: accentColor }} />
           <h2 className="text-3xl font-black uppercase tracking-tighter italic">Solución {featured.category}</h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {posts.map((post) => (
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+          className="relative overflow-hidden rounded-[2rem] bg-white/5 border border-white/10 p-8 mb-12 hover:border-white/20 transition-all"
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div className="aspect-video rounded-2xl overflow-hidden relative">
+              <img src={posts[0].image} alt={featured.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-60" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+              <div className="absolute bottom-4 left-4">
+                <span className="px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-[10px] font-bold uppercase tracking-widest border border-white/10">Destacado</span>
+              </div>
+            </div>
+            <div>
+              <h3 className="text-4xl font-bold mb-4">{featured.title}</h3>
+              <p className="text-gray-300 text-lg leading-relaxed mb-6">{featured.excerpt}</p>
+              <div className="flex justify-between items-center">
+                <div className="flex gap-4">
+                  <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">{featured.category}</span>
+                  <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">{featured.readTime}</span>
+                </div>
+                <button className="flex items-center gap-2 text-xs font-black uppercase tracking-widest hover:opacity-70 transition-opacity" style={{ color: accentColor }}>
+                  Leer Más
+                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M5 12h14" />
+                    <path d="m12 5 7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+          {posts.slice(1).map((post) => (
             <motion.div
               key={post.id}
               initial={{ opacity: 0, y: 20 }}
@@ -77,27 +127,34 @@ function App() {
             </motion.div>
           ))}
         </div>
-        <div className="flex items-center gap-4 mb-12 mt-12">
+
+        <div className="flex items-center gap-4 mb-12">
           <div className="h-1 w-12 rounded-full" style={{ backgroundColor: accentColor }} />
           <h2 className="text-3xl font-black uppercase tracking-tighter italic">Prueba Social</h2>
           <div className="text-3xl font-black uppercase tracking-tighter italic ml-4">
             <span style={{ color: accentColor }}>&#9733;</span> 4.8 (120 reseñas)
           </div>
         </div>
-        <div className="bg-orange-500 p-4 rounded-lg text-white text-center mb-12">
-          <button
-            className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded transition-colors"
-            onClick={() => {
-              window.open('https://wa.me/?text=Hola! Vengo desde su sitio web.', '_blank');
-            }}
-          >
-            Reservar
-          </button>
-        </div>
-        {posts[0].image && (
-          <div className="bg-white p-4 rounded-lg text-gray-600 text-center mb-12">
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+          <div className="bg-gradient-to-br from-orange-500/20 to-orange-600/20 p-8 rounded-2xl border border-orange-500/20">
+            <h3 className="text-xl font-bold mb-4">Reserva tu Asesoría</h3>
+            <p className="text-gray-300 mb-6">Obtén una consulta personalizada con nuestros expertos.</p>
             <button
-              className="bg-gray-200 hover:bg-gray-300 text-gray-600 font-bold py-2 px-4 rounded transition-colors"
+              className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg transition-colors w-full"
+              onClick={() => {
+                window.open('https://wa.me/?text=Hola! Vengo desde su sitio web.', '_blank');
+              }}
+            >
+              Contactar por WhatsApp
+            </button>
+          </div>
+
+          <div className="bg-gradient-to-br from-blue-500/20 to-blue-600/20 p-8 rounded-2xl border border-blue-500/20">
+            <h3 className="text-xl font-bold mb-4">Ubicación</h3>
+            <p className="text-gray-300 mb-6">Visítanos en nuestra oficina principal en Cúcuta.</p>
+            <button
+              className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg transition-colors w-full"
               onClick={() => {
                 window.open('https://www.google.com/maps/search/?api=1&query=7.9398,-72.4989', '_blank');
               }}
@@ -105,8 +162,9 @@ function App() {
               Cómo Llegar
             </button>
           </div>
-        )}
+        </div>
       </div>
+
       <section className="py-20 bg-[#050505] border-t border-white/10 relative overflow-hidden">
         <div className="max-w-4xl mx-auto px-6">
           <div className="bg-[#0a0f1c]/80 backdrop-blur-xl border border-white/10 rounded-2xl p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8">
@@ -139,6 +197,7 @@ function App() {
           </div>
         </div>
       </section>
+
       <footer className="py-12 border-t border-white/10 bg-[#020202] text-slate-400">
         <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex flex-col items-center md:items-start">
