@@ -37,7 +37,7 @@ const posts: Post[] = [
   },
 ];
 
-function App() {
+const App: React.FC = () => {
   return (
     <div className="min-h-screen bg-black text-white font-sans selection:bg-pink-500/30">
       <div className="py-20 px-8 max-w-6xl mx-auto">
@@ -51,10 +51,12 @@ function App() {
               key={post.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
               className="group relative overflow-hidden rounded-[2rem] bg-white/5 border border-white/10 p-8 hover:border-white/20 transition-all"
             >
               <div className="aspect-video rounded-2xl overflow-hidden mb-6 relative">
-                <img src={post.image} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-60" />
+                <img src={post.image} alt={post.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-60" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
                 <div className="absolute bottom-4 left-4">
                   <span className="px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-[10px] font-bold uppercase tracking-widest border border-white/10">Actualización</span>
@@ -66,6 +68,9 @@ function App() {
                 <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">{post.date}</span>
                 <button className="flex items-center gap-2 text-xs font-black uppercase tracking-widest hover:opacity-70 transition-opacity" style={{ color: accentColor }}>
                   Leer Más
+                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
                 </button>
               </div>
             </motion.div>
@@ -80,9 +85,9 @@ function App() {
         </div>
         <div className="bg-orange-500 p-4 rounded-lg text-white text-center mb-12">
           <button
-            className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded"
+            className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded transition-colors"
             onClick={() => {
-              window.location.href = 'https://wa.me/?text=Hola! Vengo desde su sitio web.';
+              window.open('https://wa.me/?text=Hola! Vengo desde su sitio web.', '_blank');
             }}
           >
             Reservar
@@ -91,9 +96,9 @@ function App() {
         {posts[0].image && (
           <div className="bg-white p-4 rounded-lg text-gray-600 text-center mb-12">
             <button
-              className="bg-gray-200 hover:bg-gray-400 text-gray-600 font-bold py-2 px-4 rounded"
+              className="bg-gray-200 hover:bg-gray-400 text-gray-600 font-bold py-2 px-4 rounded transition-colors"
               onClick={() => {
-                window.location.href = 'https://www.google.com/maps/search/?api=1&query=7.9398,-72.4989';
+                window.open('https://www.google.com/maps/search/?api=1&query=7.9398,-72.4989', '_blank');
               }}
             >
               Cómo Llegar
@@ -106,7 +111,10 @@ function App() {
           <div className="bg-[#0a0f1c]/80 backdrop-blur-xl border border-white/10 rounded-2xl p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="flex items-start gap-4">
               <div className="p-3 bg-blue-500/10 border border-blue-500/20 rounded text-blue-400">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-map-pin"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
               </div>
               <div>
                 <h3 className="font-bold text-lg text-white uppercase tracking-wider">Wily</h3>
@@ -114,14 +122,18 @@ function App() {
                 <p className="text-blue-400 text-xs font-mono uppercase tracking-widest mt-0.5">Cúcuta</p>
               </div>
             </div>
-            <a 
-              href="https://www.google.com/maps/search/?api=1&query=7.9398,-72.4989" 
-              target="_blank" 
-              rel="noopener noreferrer" 
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=7.9398,-72.4989"
+              target="_blank"
+              rel="noopener noreferrer"
               className="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold uppercase tracking-wider rounded-lg transition-colors flex items-center gap-2"
             >
               Cómo Llegar
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-external-link"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                <polyline points="15 3 21 3 21 9"/>
+                <line x1="10" y1="14" x2="21" y2="3"/>
+              </svg>
             </a>
           </div>
         </div>
