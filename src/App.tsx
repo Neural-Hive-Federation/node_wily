@@ -11,120 +11,213 @@ function App() {
         adn="&quot;{\&quot;report\&quot;:\&quot;Plataforma inteligente de negocios auto-actualizable para Wily\&quot;,\&quot;opportunity_score\&quot;:95,\&quot;google_place_id\&quot;:\&quot;manual\&quot;,\&quot;location\&quot;:{\&quot;latitude\&quot;:7.9398,\&quot;longitude\&quot;:-72.4989},\&quot;custom_parameters\&quot;:{\&quot;template\&quot;:\&quot;prism\&quot;,\&quot;color\&quot;:\&quot;#FF6B35\&quot;,\&quot;business_name\&quot;:\&quot;Wily\&quot;,\&quot;niche\&quot;:\&quot;Servicios Digitales\&quot;,\&quot;city\&quot;:\&quot;Cúcuta\&quot;,\&quot;description\&quot;:\&quot;Plataforma inteligente de negocios auto-actualizable para Wily\&quot;}}&quot;" 
       />
       
-      const accentColor = '#FF6B35';
+      // App.tsx
 
-const posts = [
+
+
+
+const accentColor = '#FF6B35'; // Cambiado a orange-500
+
+interface Post {
+  id: number;
+  title: string;
+  content: string;
+  date: string;
+  image: string;
+}
+
+interface FeaturedProps {
+  title: string;
+  excerpt: string;
+  category: string;
+  readTime: string;
+  author: string;
+}
+
+const featured: FeaturedProps = {
+  title: "Solución Integral para Negocios",
+  excerpt: "Plataforma inteligente de negocios auto-actualizable para Wily.",
+  category: "Servicios",
+  readTime: "5 min",
+  author: "Wily",
+};
+
+const posts: Post[] = [
   {
     id: 1,
-    title: 'Servicios Digitales de Wily',
-    content: 'Nuestra plataforma inteligente de negocios auto-actualizable está diseñada para ayudarte a alcanzar tus objetivos.',
-    date: '2024-09-16',
-    image: 'https://via.placeholder.com/300',
-  },
-  {
-    id: 2,
-    title: 'Nuestra Misión en Cúcuta',
-    content: 'En Wily, nos enfocamos en brindar soluciones innovadoras y personalizadas para nuestros clientes en la ciudad de Cúcuta.',
-    date: '2024-09-15',
-    image: 'https://via.placeholder.com/300',
+    title: "Servicios Digitales",
+    content: "Solución integral para negocios.",
+    date: "10 de febrero de 2023",
+    image: "https://via.placeholder.com/600x400",
   },
 ];
 
-const App = () => {
+
   
-    <div>
-      <section className="py-20 px-8 max-w-6xl mx-auto">
-        <div className="flex items-center gap-4 mb-12">
-          <div className="h-1 w-12 rounded-full" style={{ backgroundColor: accentColor }} />
-          <h2 className="text-3xl font-black uppercase tracking-tighter italic">Wily <span style={{ color: accentColor }}>Servicios Digitales</span></h2>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {posts.map((post) => (
-            <motion.div
-              key={post.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              className="group relative overflow-hidden rounded-[2rem] bg-white/5 border border-white/10 p-8 hover:border-white/20 transition-all"
-            >
-              <div className="aspect-video rounded-2xl overflow-hidden mb-6 relative">
-                <img src={post.image} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-60" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-                <div className="absolute bottom-4 left-4">
-                  <span className="px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-[10px] font-bold uppercase tracking-widest border border-white/10">Wily Update</span>
-                </div>
-              </div>
-              <h3 className="text-2xl font-bold mb-4">{post.title}</h3>
-              <p className="text-gray-400 text-sm leading-relaxed mb-6">{post.content}</p>
-              <div className="flex justify-between items-center">
-                <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">{post.date}</span>
-                <button className="flex items-center gap-2 text-xs font-black uppercase tracking-widest hover:opacity-70 transition-opacity" style={{ color: accentColor }}>
-                  Leer Más <ArrowRight size={14} />
-                </button>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-      <nav className="navbar bg-white/10 backdrop-blur-md py-4">
-        <div className="container mx-auto flex justify-between items-center">
-          <span className="text-lg font-bold uppercase tracking-widest">⭐ 4.8 (120 reseñas)</span>
-          <a href="https://wa.me/?text=Hola! Vengo desde su sitio web." target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-xs font-black uppercase tracking-widest hover:opacity-70 transition-opacity" style={{ color: accentColor }}>
-            Reservar
-          </a>
-        </div>
-      </nav>
-      <section className="py-20 px-8 max-w-6xl mx-auto">
-        <div className="flex items-center gap-4 mb-12">
-          <div className="h-1 w-12 rounded-full" style={{ backgroundColor: accentColor }} />
-          <h2 className="text-3xl font-black uppercase tracking-tighter italic">Cómo Llegar a Wily</h2>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="group relative overflow-hidden rounded-[2rem] bg-white/5 border border-white/10 p-8 hover:border-white/20 transition-all">
+    <section className="py-20 px-8 max-w-6xl mx-auto">
+      <div className="flex items-center gap-4 mb-12">
+        <div className="h-1 w-12 rounded-full" style={{ backgroundColor: accentColor }} />
+        <h2 className="text-3xl font-black uppercase tracking-tighter italic">Solución {featured.category}</h2>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {posts.map((post) => (
+          <motion.div
+            key={post.id}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="group relative overflow-hidden rounded-[2rem] bg-white/5 border border-white/10 p-8 hover:border-white/20 transition-all"
+          >
             <div className="aspect-video rounded-2xl overflow-hidden mb-6 relative">
-              <iframe src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3977.415911292743!2d-72.4989!3d7.9398!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e677c1befe8c3b%3A0x7c7e4f2c9e9d7!2sC%C3%BAcuta!5e0!3m2!1ses!2sco!4v1684923464446!5m2!1ses!2sco`} frameBorder="0" className="w-full h-full object-cover" />
+              <img src={post.image} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-60" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
               <div className="absolute bottom-4 left-4">
-                <span className="px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-[10px] font-bold uppercase tracking-widest border border-white/10">Wily Ubicación</span>
+                <span className="px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-[10px] font-bold uppercase tracking-widest border border-white/10">Actualización</span>
               </div>
             </div>
-            <h3 className="text-2xl font-bold mb-4">Nuestra Ubicación</h3>
-            <p className="text-gray-400 text-sm leading-relaxed mb-6">Puedes encontrar nuestra ubicación en el mapa de Google.</p>
+            <h3 className="text-2xl font-bold mb-4">{post.title}</h3>
+            <p className="text-gray-400 text-sm leading-relaxed mb-6">{post.content}</p>
             <div className="flex justify-between items-center">
-              <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest"></span>
-              <a href="https://www.google.com/maps/search/?api=1&query=7.9398,-72.4989" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-xs font-black uppercase tracking-widest hover:opacity-70 transition-opacity" style={{ color: accentColor }}>
-                Cómo Llegar
-              </a>
+              <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">{post.date}</span>
+              <button className="flex items-center gap-2 text-xs font-black uppercase tracking-widest hover:opacity-70 transition-opacity" style={{ color: accentColor }}>
+                Leer Más <ArrowRight size={14} />
+              </button>
             </div>
-          </div>
+          </motion.div>
+        ))}
+      </div>
+      <div className="flex items-center gap-4 mb-12 mt-12">
+        <div className="h-1 w-12 rounded-full" style={{ backgroundColor: accentColor }} />
+        <h2 className="text-3xl font-black uppercase tracking-tighter italic">Prueba Social</h2>
+        <div className="text-3xl font-black uppercase tracking-tighter italic ml-4">
+          <span style={{ color: accentColor }}>⭐</span> 4.8 (120 reseñas)
         </div>
-      </section>
-      <footer className="bg-gray-900 py-8">
-        <div className="container mx-auto flex justify-between items-center">
-          <span className="text-lg font-bold uppercase tracking-widest text-white">Powered by <a href="https://neural-nexus-inky.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-orange-500">PNN Portal Neural Nexus</a> | <a href="https://neural-nexus-inky.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-orange-500">Nexus Hive Federation</a></span>
-          <div className="flex gap-4">
-            <a href="#" target="_blank" rel="noopener noreferrer">
-              <i className="fa fa-instagram text-white" />
-            </a>
-            <a href="#" target="_blank" rel="noopener noreferrer">
-              <i className="fa fa-facebook text-white" />
-            </a>
-            <a href="#" target="_blank" rel="noopener noreferrer">
-              <i className="fa fa-tiktok text-white" />
-            </a>
-            <a href="#" target="_blank" rel="noopener noreferrer">
-              <i className="fa fa-youtube text-white" />
-            </a>
-          </div>
+      </div>
+      <div className="bg-orange-500 p-4 rounded-lg text-white text-center mb-12">
+        <button
+          className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded"
+          onClick={() => {
+            window.location.href = 'https://wa.me/?text=Hola! Vengo desde su sitio web.';
+          }}
+        >
+          Reservar
+        </button>
+      </div>
+      {posts[0].image && (
+        <div className="bg-white p-4 rounded-lg text-gray-600 text-center mb-12">
+          <button
+            className="bg-gray-200 hover:bg-gray-400 text-gray-600 font-bold py-2 px-4 rounded"
+            onClick={() => {
+              window.location.href = 'https://www.google.com/maps/search/?api=1&query=7.9398,-72.4989';
+            }}
+          >
+            Cómo Llegar
+          </button>
+        </div>
+      )}
+      <footer className="bg-gray-800 p-4 text-gray-300 text-center mb-12">
+        <div className="flex justify-center items-center">
+          <a
+            href="https://neural-nexus-inky.vercel.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mr-4"
+          >
+            Powered by PNN Portal Neural Nexus
+          </a>
+          <a
+            href="https://www.instagram.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mx-4"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M7 8h10M7 12h10M7 16h10M2 16h16M2 12h16m14 0H2m14 0h16"
+              />
+            </svg>
+          </a>
+          <a
+            href="https://www.facebook.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mx-4"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M16 12a4 4 0 10-8 0 4 4 0 008 0zM12 20v-2.5a2.5 2.5 0 00-5 0 2.5 2.5 0 005 0v2.5m0-10a2.5 2.5 0 015 0 2.5 2.5 0 015 0 2.5 2.5 0 01-5 0z"
+              />
+            </svg>
+          </a>
+          <a
+            href="https://www.tiktok.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mx-4"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+              />
+            </svg>
+          </a>
+          <a
+            href="https://www.youtube.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mx-4"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </a>
         </div>
       </footer>
-    </div>
+    </section>
   );
-};
+}
 
       {/* --- SECCIONES INTERMEDIAS DINÁMICAS --- */}
       // ... [SECCIONES INTERMEDIAS...]
 
-      <NeuralFeed nodeId="cf217400-7056-4b35-b79e-32ee1ff971ab" />
+      <NeuralFeed nodeId="e7fd2e42-5d57-47c1-bc31-c2ccda1e19e6" />
 
       {/* Sección de Ubicación Física */}
       
