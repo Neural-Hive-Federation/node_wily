@@ -37,7 +37,7 @@ const posts: Post[] = [
   },
 ];
 
-const App: React.FC = () => {
+function App() {
   return (
     <div className="min-h-screen bg-black text-white font-sans selection:bg-pink-500/30">
       <div className="py-20 px-8 max-w-6xl mx-auto">
@@ -51,8 +51,8 @@ const App: React.FC = () => {
               key={post.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
               transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
               className="group relative overflow-hidden rounded-[2rem] bg-white/5 border border-white/10 p-8 hover:border-white/20 transition-all"
             >
               <div className="aspect-video rounded-2xl overflow-hidden mb-6 relative">
@@ -69,7 +69,8 @@ const App: React.FC = () => {
                 <button className="flex items-center gap-2 text-xs font-black uppercase tracking-widest hover:opacity-70 transition-opacity" style={{ color: accentColor }}>
                   Leer Más
                   <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M5 12h14M12 5l7 7-7 7" />
+                    <path d="M5 12h14" />
+                    <path d="m12 5 7 7-7 7" />
                   </svg>
                 </button>
               </div>
@@ -85,7 +86,7 @@ const App: React.FC = () => {
         </div>
         <div className="bg-orange-500 p-4 rounded-lg text-white text-center mb-12">
           <button
-            className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded transition-colors"
+            className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded transition-colors"
             onClick={() => {
               window.open('https://wa.me/?text=Hola! Vengo desde su sitio web.', '_blank');
             }}
@@ -96,7 +97,7 @@ const App: React.FC = () => {
         {posts[0].image && (
           <div className="bg-white p-4 rounded-lg text-gray-600 text-center mb-12">
             <button
-              className="bg-gray-200 hover:bg-gray-400 text-gray-600 font-bold py-2 px-4 rounded transition-colors"
+              className="bg-gray-200 hover:bg-gray-300 text-gray-600 font-bold py-2 px-4 rounded transition-colors"
               onClick={() => {
                 window.open('https://www.google.com/maps/search/?api=1&query=7.9398,-72.4989', '_blank');
               }}
@@ -112,8 +113,8 @@ const App: React.FC = () => {
             <div className="flex items-start gap-4">
               <div className="p-3 bg-blue-500/10 border border-blue-500/20 rounded text-blue-400">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
-                  <circle cx="12" cy="10" r="3"/>
+                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                  <circle cx="12" cy="10" r="3" />
                 </svg>
               </div>
               <div>
@@ -130,9 +131,9 @@ const App: React.FC = () => {
             >
               Cómo Llegar
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-                <polyline points="15 3 21 3 21 9"/>
-                <line x1="10" y1="14" x2="21" y2="3"/>
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
               </svg>
             </a>
           </div>
