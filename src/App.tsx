@@ -1,60 +1,51 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { SalesAdvisorWidget } from './components/SalesAdvisorWidget';
-import { NeuralFeed } from './components/NeuralFeed';
+import axios from 'axios';
 
 function App() {
-  return (
-    <div className="min-h-screen bg-black text-white font-sans selection:bg-pink-500/30">
-      <SalesAdvisorWidget 
-        nodeName="Wily" 
-        adn="&quot;{\&quot;report\&quot;:\&quot;Plataforma inteligente de negocios auto-actualizable para Wily\&quot;,\&quot;opportunity_score\&quot;:95,\&quot;google_place_id\&quot;:\&quot;manual\&quot;,\&quot;location\&quot;:{\&quot;latitude\&quot;:7.9398,\&quot;longitude\&quot;:-72.4989},\&quot;custom_parameters\&quot;:{\&quot;template\&quot;:\&quot;prism\&quot;,\&quot;color\&quot;:\&quot;#FF6B35\&quot;,\&quot;business_name\&quot;:\&quot;Wily\&quot;,\&quot;niche\&quot;:\&quot;Servicios Digitales\&quot;,\&quot;city\&quot;:\&quot;Cúcuta\&quot;,\&quot;description\&quot;:\&quot;Plataforma inteligente de negocios auto-actualizable para Wily\&quot;}}&quot;" 
-      />
-      
-      const accentColor = '#FF6B35';
+  const accentColor = '#FF6B35';
 
-const posts = [
-  {
-    id: 1,
-    title: 'Servicios Digitales de Wily',
-    content: 'Plataforma inteligente de negocios auto-actualizable para Wily',
-    image: 'https://picsum.photos/300',
-    date: '22 de Febrero de 2024',
-  },
-  {
-    id: 2,
-    title: 'Nuestra Misión',
-    content: 'Ofrecer soluciones innovadoras y personalizadas para nuestros clientes',
-    image: 'https://picsum.photos/300',
-    date: '15 de Enero de 2024',
-  },
-  {
-    id: 3,
-    title: '¿Qué ofrecemos?',
-    content: 'Desarrollo de plataformas de negocios auto-actualizables y servicios de consultoría',
-    image: 'https://picsum.photos/300',
-    date: '10 de Diciembre de 2023',
-  },
-];
-
+  const posts = [
+    {
+      id: 1,
+      title: 'Servicios Digitales de Wily',
+      content: 'Plataforma inteligente de negocios auto-actualizable para Wily',
+      image: 'https://picsum.photos/300',
+      date: '22 de Febrero de 2024',
+    },
+    {
+      id: 2,
+      title: 'Nuestra Misión',
+      content: 'Ofrecer soluciones innovadoras y personalizadas para nuestros clientes',
+      image: 'https://picsum.photos/300',
+      date: '15 de Enero de 2024',
+    },
+    {
+      id: 3,
+      title: '¿Qué ofrecemos?',
+      content: 'Desarrollo de plataformas de negocios auto-actualizables y servicios de consultoría',
+      image: 'https://picsum.photos/300',
+      date: '10 de Diciembre de 2023',
+    },
+  ];
 
   const [form, setForm] = useState({ nombre: '', correo: '', mensaje: '' });
   const [enviado, setEnviado] = useState(false);
   const [error, setError] = useState(null);
 
-  const enviarMensaje = async (e) => {
+  const enviarMensaje = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const respuesta = await axios.post('https://api-email.com/enviar', form);
       setEnviado(true);
       setError(null);
-    } catch (error) {
+    } catch (error: any) {
       setError(error.message);
     }
   };
 
-  
-    <div className="min-h-screen bg-gray-900 text-white">
+  return (
+    <div className="min-h-screen bg-black text-white font-sans selection:bg-pink-500/30">
       <nav className="py-4 bg-gray-800">
         <div className="container mx-auto flex justify-between items-center">
           <h2 className="text-2xl font-bold uppercase tracking-tighter italic">
@@ -67,7 +58,7 @@ const posts = [
             className="flex items-center gap-2 text-xs font-black uppercase tracking-widest hover:opacity-70 transition-opacity"
             style={{ color: accentColor }}
           >
-            Reservar <ArrowRight size={14} />
+            Reservar
           </a>
         </div>
       </nav>
@@ -101,7 +92,7 @@ const posts = [
               <div className="flex justify-between items-center">
                 <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">{post.date}</span>
                 <button className="flex items-center gap-2 text-xs font-black uppercase tracking-widest hover:opacity-70 transition-opacity" style={{ color: accentColor }}>
-                  Leer Más <ArrowRight size={14} />
+                  Leer Más
                 </button>
               </div>
             </motion.div>
@@ -186,64 +177,5 @@ const posts = [
     </div>
   );
 }
-
-      {/* --- SECCIONES INTERMEDIAS DINÁMICAS --- */}
-      // ... [SECCIONES INTERMEDIAS...]
-
-      <NeuralFeed nodeId="e5a7aadd-4414-434c-ba26-c663f28149e2" />
-
-      {/* Sección de Ubicación Física */}
-      
-      <section className="py-20 bg-[#050505] border-t border-white/10 relative overflow-hidden">
-        <div className="max-w-4xl mx-auto px-6">
-          <div className="bg-[#0a0f1c]/80 backdrop-blur-xl border border-white/10 rounded-2xl p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8">
-            <div className="flex items-start gap-4">
-              <div className="p-3 bg-blue-500/10 border border-blue-500/20 rounded text-blue-400">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-map-pin"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-              </div>
-              <div>
-                <h3 className="font-bold text-lg text-white uppercase tracking-wider">Wily</h3>
-                <p className="text-slate-400 text-sm mt-1">Cúcuta</p>
-                <p className="text-blue-400 text-xs font-mono uppercase tracking-widest mt-0.5">Cúcuta</p>
-              </div>
-            </div>
-            <a 
-              href="https://www.google.com/maps/search/?api=1&query=7.9398,-72.4989" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold uppercase tracking-wider rounded-lg transition-colors flex items-center gap-2"
-            >
-              Cómo Llegar
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-external-link"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </a>
-          </div>
-        </div>
-      </section>
-      
-
-      <footer className="py-12 border-t border-white/10 bg-[#020202] text-slate-400">
-        <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="flex flex-col items-center md:items-start">
-            <span className="font-bold text-white tracking-wider">WILY</span>
-            <p className="text-[10px] text-slate-600 mt-1">&copy; 2026 Todos los derechos reservados.</p>
-          </div>
-          <div className="flex items-center gap-6">
-            
-            
-            
-            
-          </div>
-          <div className="text-[10px] text-slate-500 font-mono text-center md:text-right">
-            Powered by <a href="https://neural-nexus-inky.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">PNN Portal Neural Nexus</a> | <a href="https://neural-nexus-inky.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-purple-400 hover:underline">Nexus Hive Federation</a>
-          </div>
-        </div>
-      </footer>
-
-      
-    </div>
-  );
-}
-
-// --- NEURAL_INJECTION_POINT ---
 
 export default App;
