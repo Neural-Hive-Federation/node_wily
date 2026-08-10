@@ -1,115 +1,99 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-
-interface Post {
-  id: number;
-  title: string;
-  content: string;
-  date: string;
-  image: string;
-}
-
-interface FeaturedProps {
-  title: string;
-  excerpt: string;
-  category: string;
-  readTime: string;
-  author: string;
-}
-
-const accentColor = '#FF6B35';
-
-const featured: FeaturedProps = {
-  title: "Solución Integral para Negocios",
-  excerpt: "Plataforma inteligente de negocios auto-actualizable para Wily.",
-  category: "Servicios",
-  readTime: "5 min",
-  author: "Wily",
-};
-
-const posts: Post[] = [
-  {
-    id: 1,
-    title: "Servicios Digitales",
-    content: "Solución integral para negocios.",
-    date: "10 de febrero de 2023",
-    image: "https://via.placeholder.com/600x400",
-  },
-  {
-    id: 2,
-    title: "Innovación Tecnológica",
-    content: "Transformación digital con IA y automatización.",
-    date: "15 de marzo de 2023",
-    image: "https://via.placeholder.com/600x400",
-  },
-  {
-    id: 3,
-    title: "Consultoría Estratégica",
-    content: "Asesoramiento personalizado para crecimiento empresarial.",
-    date: "20 de abril de 2023",
-    image: "https://via.placeholder.com/600x400",
-  }
-];
+import { SalesAdvisorWidget } from './components/SalesAdvisorWidget';
+import { NeuralFeed } from './components/NeuralFeed';
 
 function App() {
   return (
     <div className="min-h-screen bg-black text-white font-sans selection:bg-pink-500/30">
-      <div className="py-20 px-8 max-w-6xl mx-auto">
+      <SalesAdvisorWidget 
+        nodeName="Wily" 
+        adn="&quot;{\&quot;report\&quot;:\&quot;Plataforma inteligente de negocios auto-actualizable para Wily\&quot;,\&quot;opportunity_score\&quot;:95,\&quot;google_place_id\&quot;:\&quot;manual\&quot;,\&quot;location\&quot;:{\&quot;latitude\&quot;:7.9398,\&quot;longitude\&quot;:-72.4989},\&quot;custom_parameters\&quot;:{\&quot;template\&quot;:\&quot;prism\&quot;,\&quot;color\&quot;:\&quot;#FF6B35\&quot;,\&quot;business_name\&quot;:\&quot;Wily\&quot;,\&quot;niche\&quot;:\&quot;Servicios Digitales\&quot;,\&quot;city\&quot;:\&quot;Cúcuta\&quot;,\&quot;description\&quot;:\&quot;Plataforma inteligente de negocios auto-actualizable para Wily\&quot;}}&quot;" 
+      />
+      
+      const accentColor = '#FF6B35';
+
+const posts = [
+  {
+    id: 1,
+    title: 'Servicios Digitales de Wily',
+    content: 'Plataforma inteligente de negocios auto-actualizable para Wily',
+    image: 'https://picsum.photos/300',
+    date: '22 de Febrero de 2024',
+  },
+  {
+    id: 2,
+    title: 'Nuestra Misión',
+    content: 'Ofrecer soluciones innovadoras y personalizadas para nuestros clientes',
+    image: 'https://picsum.photos/300',
+    date: '15 de Enero de 2024',
+  },
+  {
+    id: 3,
+    title: '¿Qué ofrecemos?',
+    content: 'Desarrollo de plataformas de negocios auto-actualizables y servicios de consultoría',
+    image: 'https://picsum.photos/300',
+    date: '10 de Diciembre de 2023',
+  },
+];
+
+
+  const [form, setForm] = useState({ nombre: '', correo: '', mensaje: '' });
+  const [enviado, setEnviado] = useState(false);
+  const [error, setError] = useState(null);
+
+  const enviarMensaje = async (e) => {
+    e.preventDefault();
+    try {
+      const respuesta = await axios.post('https://api-email.com/enviar', form);
+      setEnviado(true);
+      setError(null);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
+  
+    <div className="min-h-screen bg-gray-900 text-white">
+      <nav className="py-4 bg-gray-800">
+        <div className="container mx-auto flex justify-between items-center">
+          <h2 className="text-2xl font-bold uppercase tracking-tighter italic">
+            Wily <span style={{ color: accentColor }}>Servicios Digitales</span>
+          </h2>
+          <a
+            href="https://wa.me/?text=Hola! Vengo desde su sitio web."
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center gap-2 text-xs font-black uppercase tracking-widest hover:opacity-70 transition-opacity"
+            style={{ color: accentColor }}
+          >
+            Reservar <ArrowRight size={14} />
+          </a>
+        </div>
+      </nav>
+      <section className="py-20 px-8 max-w-6xl mx-auto bg-[linear-gradient(to_bottom, #f7f7f7, #fff)]">
         <div className="flex items-center gap-4 mb-12">
           <div className="h-1 w-12 rounded-full" style={{ backgroundColor: accentColor }} />
-          <h2 className="text-3xl font-black uppercase tracking-tighter italic">Solución {featured.category}</h2>
+          <h2 className="text-3xl font-black uppercase tracking-tighter italic">
+            Wily <span style={{ color: accentColor }}>Servicios Digitales</span>
+          </h2>
+          <span className="text-lg font-bold">⭐ 4.8 (120 reseñas)</span>
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-          className="relative overflow-hidden rounded-[2rem] bg-white/5 border border-white/10 p-8 mb-12 hover:border-white/20 transition-all"
-        >
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-            <div className="aspect-video rounded-2xl overflow-hidden relative">
-              <img src={posts[0].image} alt={featured.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-60" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-              <div className="absolute bottom-4 left-4">
-                <span className="px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-[10px] font-bold uppercase tracking-widest border border-white/10">Destacado</span>
-              </div>
-            </div>
-            <div>
-              <h3 className="text-4xl font-bold mb-4">{featured.title}</h3>
-              <p className="text-gray-300 text-lg leading-relaxed mb-6">{featured.excerpt}</p>
-              <div className="flex justify-between items-center">
-                <div className="flex gap-4">
-                  <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">{featured.category}</span>
-                  <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">{featured.readTime}</span>
-                </div>
-                <button className="flex items-center gap-2 text-xs font-black uppercase tracking-widest hover:opacity-70 transition-opacity" style={{ color: accentColor }}>
-                  Leer Más
-                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M5 12h14" />
-                    <path d="m12 5 7 7-7 7" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>
-        </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-          {posts.slice(1).map((post) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {posts.map((post) => (
             <motion.div
               key={post.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
               className="group relative overflow-hidden rounded-[2rem] bg-white/5 border border-white/10 p-8 hover:border-white/20 transition-all"
             >
               <div className="aspect-video rounded-2xl overflow-hidden mb-6 relative">
-                <img src={post.image} alt={post.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-60" />
+                <img src={post.image} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-60" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
                 <div className="absolute bottom-4 left-4">
-                  <span className="px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-[10px] font-bold uppercase tracking-widest border border-white/10">Actualización</span>
+                  <span className="px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-[10px] font-bold uppercase tracking-widest border border-white/10">
+                    Wily Update
+                  </span>
                 </div>
               </div>
               <h3 className="text-2xl font-bold mb-4">{post.title}</h3>
@@ -117,63 +101,105 @@ function App() {
               <div className="flex justify-between items-center">
                 <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">{post.date}</span>
                 <button className="flex items-center gap-2 text-xs font-black uppercase tracking-widest hover:opacity-70 transition-opacity" style={{ color: accentColor }}>
-                  Leer Más
-                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M5 12h14" />
-                    <path d="m12 5 7 7-7 7" />
-                  </svg>
+                  Leer Más <ArrowRight size={14} />
                 </button>
               </div>
             </motion.div>
           ))}
         </div>
-
-        <div className="flex items-center gap-4 mb-12">
-          <div className="h-1 w-12 rounded-full" style={{ backgroundColor: accentColor }} />
-          <h2 className="text-3xl font-black uppercase tracking-tighter italic">Prueba Social</h2>
-          <div className="text-3xl font-black uppercase tracking-tighter italic ml-4">
-            <span style={{ color: accentColor }}>&#9733;</span> 4.8 (120 reseñas)
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-          <div className="bg-gradient-to-br from-orange-500/20 to-orange-600/20 p-8 rounded-2xl border border-orange-500/20">
-            <h3 className="text-xl font-bold mb-4">Reserva tu Asesoría</h3>
-            <p className="text-gray-300 mb-6">Obtén una consulta personalizada con nuestros expertos.</p>
-            <button
-              className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg transition-colors w-full"
-              onClick={() => {
-                window.open('https://wa.me/?text=Hola! Vengo desde su sitio web.', '_blank');
-              }}
-            >
-              Contactar por WhatsApp
-            </button>
-          </div>
-
-          <div className="bg-gradient-to-br from-blue-500/20 to-blue-600/20 p-8 rounded-2xl border border-blue-500/20">
-            <h3 className="text-xl font-bold mb-4">Ubicación</h3>
-            <p className="text-gray-300 mb-6">Visítanos en nuestra oficina principal en Cúcuta.</p>
-            <button
-              className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg transition-colors w-full"
-              onClick={() => {
-                window.open('https://www.google.com/maps/search/?api=1&query=7.9398,-72.4989', '_blank');
-              }}
+      </section>
+      <section className="py-12 bg-gray-800">
+        <div className="container mx-auto flex justify-center">
+          <button className="flex items-center gap-2 text-xs font-black uppercase tracking-widest hover:opacity-70 transition-opacity" style={{ color: accentColor }}>
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=7.9398,-72.4989"
+              target="_blank"
+              rel="noreferrer"
             >
               Cómo Llegar
-            </button>
+            </a>
+          </button>
+        </div>
+      </section>
+      <section className="py-12 bg-gray-800">
+        <div className="container mx-auto flex justify-center">
+          <form onSubmit={enviarMensaje} className="flex flex-col gap-4">
+            <input
+              type="text"
+              placeholder="Nombre"
+              value={form.nombre}
+              onChange={(e) => setForm({ ...form, nombre: e.target.value })}
+              className="p-2 rounded-md border border-gray-400 hover:border-gray-600 transition-border"
+            />
+            <input
+              type="email"
+              placeholder="Correo electrónico"
+              value={form.correo}
+              onChange={(e) => setForm({ ...form, correo: e.target.value })}
+              className="p-2 rounded-md border border-gray-400 hover:border-gray-600 transition-border"
+            />
+            <textarea
+              placeholder="Mensaje"
+              value={form.mensaje}
+              onChange={(e) => setForm({ ...form, mensaje: e.target.value })}
+              className="p-2 rounded-md border border-gray-400 hover:border-gray-600 transition-border h-20"
+            />
+            {enviado ? (
+              <p className="text-green-600">Mensaje enviado con éxito!</p>
+            ) : (
+              <button type="submit" className="bg-[#FF6B35] p-2 rounded-md text-white hover:bg-[#FF9C6E] transition-colors">
+                Enviar
+              </button>
+            )}
+            {error && <p className="text-red-600">{error}</p>}
+          </form>
+        </div>
+      </section>
+      <footer className="py-8 bg-gray-900 text-white">
+        <div className="container mx-auto flex justify-center">
+          <p className="text-sm font-bold">
+            Powered by{' '}
+            <a href="https://neural-nexus-inky.vercel.app/" target="_blank" rel="noreferrer">
+              PNN Portal Neural Nexus
+            </a>{' '}
+            |{' '}
+            <a href="https://neural-nexus-inky.vercel.app/" target="_blank" rel="noreferrer">
+              Nexus Hive Federation
+            </a>
+          </p>
+          <div className="flex justify-center gap-4">
+            <a href="#" target="_blank" rel="noreferrer">
+              <i className="fab fa-instagram" />
+            </a>
+            <a href="#" target="_blank" rel="noreferrer">
+              <i className="fab fa-facebook" />
+            </a>
+            <a href="#" target="_blank" rel="noreferrer">
+              <i className="fab fa-tiktok" />
+            </a>
+            <a href="#" target="_blank" rel="noreferrer">
+              <i className="fab fa-youtube" />
+            </a>
           </div>
         </div>
-      </div>
+      </footer>
+    </div>
+  );
+}
 
+      {/* --- SECCIONES INTERMEDIAS DINÁMICAS --- */}
+      // ... [SECCIONES INTERMEDIAS...]
+
+      <NeuralFeed nodeId="e5a7aadd-4414-434c-ba26-c663f28149e2" />
+
+      {/* Sección de Ubicación Física */}
+      
       <section className="py-20 bg-[#050505] border-t border-white/10 relative overflow-hidden">
         <div className="max-w-4xl mx-auto px-6">
           <div className="bg-[#0a0f1c]/80 backdrop-blur-xl border border-white/10 rounded-2xl p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="flex items-start gap-4">
               <div className="p-3 bg-blue-500/10 border border-blue-500/20 rounded text-blue-400">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
-                  <circle cx="12" cy="10" r="3" />
-                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-map-pin"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
               </div>
               <div>
                 <h3 className="font-bold text-lg text-white uppercase tracking-wider">Wily</h3>
@@ -181,22 +207,19 @@ function App() {
                 <p className="text-blue-400 text-xs font-mono uppercase tracking-widest mt-0.5">Cúcuta</p>
               </div>
             </div>
-            <a
-              href="https://www.google.com/maps/search/?api=1&query=7.9398,-72.4989"
-              target="_blank"
-              rel="noopener noreferrer"
+            <a 
+              href="https://www.google.com/maps/search/?api=1&query=7.9398,-72.4989" 
+              target="_blank" 
+              rel="noopener noreferrer" 
               className="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold uppercase tracking-wider rounded-lg transition-colors flex items-center gap-2"
             >
               Cómo Llegar
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                <polyline points="15 3 21 3 21 9" />
-                <line x1="10" y1="14" x2="21" y2="3" />
-              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-external-link"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
             </a>
           </div>
         </div>
       </section>
+      
 
       <footer className="py-12 border-t border-white/10 bg-[#020202] text-slate-400">
         <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
@@ -204,13 +227,23 @@ function App() {
             <span className="font-bold text-white tracking-wider">WILY</span>
             <p className="text-[10px] text-slate-600 mt-1">&copy; 2026 Todos los derechos reservados.</p>
           </div>
+          <div className="flex items-center gap-6">
+            
+            
+            
+            
+          </div>
           <div className="text-[10px] text-slate-500 font-mono text-center md:text-right">
             Powered by <a href="https://neural-nexus-inky.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">PNN Portal Neural Nexus</a> | <a href="https://neural-nexus-inky.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-purple-400 hover:underline">Nexus Hive Federation</a>
           </div>
         </div>
       </footer>
+
+      
     </div>
   );
 }
+
+// --- NEURAL_INJECTION_POINT ---
 
 export default App;
