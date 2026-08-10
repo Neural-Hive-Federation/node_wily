@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import axios from 'axios';
 
 function App() {
   const accentColor = '#FF6B35';
@@ -36,7 +35,13 @@ function App() {
   const enviarMensaje = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const respuesta = await axios.post('https://api-email.com/enviar', form);
+      const respuesta = await fetch('https://api-email.com/enviar', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(form),
+      });
       setEnviado(true);
       setError(null);
     } catch (error: any) {
